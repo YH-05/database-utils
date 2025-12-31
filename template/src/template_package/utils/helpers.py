@@ -3,11 +3,9 @@
 import json
 from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, TypeVar
+from typing import Any
 
 from ..types import JSONObject, JSONValue
-
-T = TypeVar("T")
 
 
 # ロガーを遅延初期化で循環インポートを回避
@@ -28,22 +26,15 @@ logger: Any = _get_logger()
 def load_json_file(filepath: str | Path) -> JSONObject:
     """Load JSON data from a file.
 
-    Parameters
-    ----------
-    filepath : str | Path
-        Path to JSON file
+    Args:
+        filepath: Path to JSON file.
 
-    Returns
-    -------
-    JSONObject
-        Loaded JSON data as a dictionary
+    Returns:
+        Loaded JSON data as a dictionary.
 
-    Raises
-    ------
-    FileNotFoundError
-        If file doesn't exist
-    ValueError
-        If file contains invalid JSON
+    Raises:
+        FileNotFoundError: If file doesn't exist.
+        ValueError: If file contains invalid JSON.
     """
     path = Path(filepath)
     logger.debug(
@@ -110,16 +101,11 @@ def save_json_file(
 ) -> None:
     """Save data to a JSON file.
 
-    Parameters
-    ----------
-    data : JSONObject
-        JSON-compatible dictionary to save
-    filepath : str | Path
-        Path to save to
-    indent : int
-        JSON indentation level
-    ensure_ascii : bool
-        Whether to escape non-ASCII characters
+    Args:
+        data: JSON-compatible dictionary to save.
+        filepath: Path to save to.
+        indent: JSON indentation level.
+        ensure_ascii: Whether to escape non-ASCII characters.
     """
     path = Path(filepath)
     logger.debug(
@@ -155,30 +141,22 @@ def save_json_file(
     )
 
 
-def chunk_list(items: list[T], chunk_size: int) -> list[list[T]]:
+def chunk_list[T](items: list[T], chunk_size: int) -> list[list[T]]:
     """Split a list into chunks of specified size.
 
-    Parameters
-    ----------
-    items : list[T]
-        Items to chunk
-    chunk_size : int
-        Size of each chunk
+    Args:
+        items: Items to chunk.
+        chunk_size: Size of each chunk.
 
-    Returns
-    -------
-    list[list[T]]
-        List of chunks
+    Returns:
+        List of chunks.
 
-    Raises
-    ------
-    ValueError
-        If chunk_size is not positive
+    Raises:
+        ValueError: If chunk_size is not positive.
 
-    Examples
-    --------
-    >>> chunk_list([1, 2, 3, 4, 5], 2)
-    [[1, 2], [3, 4], [5]]
+    Examples:
+        >>> chunk_list([1, 2, 3, 4, 5], 2)
+        [[1, 2], [3, 4], [5]]
     """
     if chunk_size <= 0:
         logger.error(
@@ -215,24 +193,17 @@ def flatten_dict(
 ) -> Mapping[str, JSONValue]:
     """Flatten a nested dictionary.
 
-    Parameters
-    ----------
-    nested_dict : dict[str, JSONValue]
-        Dictionary with JSON-compatible values to flatten
-    separator : str
-        Separator for keys
-    prefix : str
-        Prefix for all keys
+    Args:
+        nested_dict: Dictionary with JSON-compatible values to flatten.
+        separator: Separator for keys.
+        prefix: Prefix for all keys.
 
-    Returns
-    -------
-    Mapping[str, JSONValue]
-        Flattened dictionary with dot-notation keys
+    Returns:
+        Flattened dictionary with dot-notation keys.
 
-    Examples
-    --------
-    >>> flatten_dict({"a": {"b": 1, "c": 2}})
-    {"a.b": 1, "a.c": 2}
+    Examples:
+        >>> flatten_dict({"a": {"b": 1, "c": 2}})
+        {"a.b": 1, "a.c": 2}
     """
     logger.debug(
         "Flattening dictionary",

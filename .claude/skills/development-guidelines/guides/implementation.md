@@ -50,7 +50,42 @@ class TaskDict(TypedDict):
 # 型エイリアス: ユニオン型、リテラル型など
 type TaskStatus = Literal["todo", "in_progress", "completed"]
 type TaskId = str
-type Nullable[T] = T | None
+type Result[T] = T | None  # ジェネリック型エイリアス
+```
+
+**ジェネリック型パラメータ（PEP 695）**:
+```python
+# ✅ 良い例: Python 3.12スタイル - ジェネリッククラス
+class Repository[T]:
+    def __init__(self) -> None:
+        self._items: list[T] = []
+
+    def add(self, item: T) -> None:
+        self._items.append(item)
+
+    def find[U](self, predicate: Callable[[T], U]) -> U | None:
+        for item in self._items:
+            if result := predicate(item):
+                return result
+        return None
+
+# ✅ 良い例: Python 3.12スタイル - ジェネリック関数
+def first[T](items: list[T]) -> T | None:
+    return items[0] if items else None
+
+def group_by[T, K](items: list[T], key: Callable[[T], K]) -> dict[K, list[T]]:
+    result: dict[K, list[T]] = {}
+    for item in items:
+        k = key(item)
+        result.setdefault(k, []).append(item)
+    return result
+
+# ❌ 悪い例: 旧スタイル - TypeVar を明示的に定義
+from typing import TypeVar, Generic
+T = TypeVar('T')  # 使わない
+
+class Repository(Generic[T]):  # 使わない
+    ...
 ```
 
 ### 命名規則

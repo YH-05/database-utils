@@ -9,25 +9,18 @@ from .logging_config import get_logger
 logger = get_logger(__name__)
 
 
-def chunk_list(items: list[Any], chunk_size: int) -> list[list[Any]]:
+def chunk_list[T](items: list[T], chunk_size: int) -> list[list[T]]:
     """Split a list into chunks of specified size.
 
-    Parameters
-    ----------
-    items : list[Any]
-        List to be chunked
-    chunk_size : int
-        Size of each chunk (must be positive)
+    Args:
+        items: List to be chunked.
+        chunk_size: Size of each chunk (must be positive).
 
-    Returns
-    -------
-    list[list[Any]]
-        List of chunks
+    Returns:
+        List of chunks.
 
-    Raises
-    ------
-    ValueError
-        If chunk_size is not positive
+    Raises:
+        ValueError: If chunk_size is not positive.
     """
     logger.debug("Chunking list", item_count=len(items), chunk_size=chunk_size)
 
@@ -52,19 +45,13 @@ def flatten_dict(
 ) -> dict[str, Any]:
     """Flatten a nested dictionary.
 
-    Parameters
-    ----------
-    nested_dict : dict[str, Any]
-        Dictionary to flatten
-    separator : str, default="."
-        Separator to use between nested keys
-    prefix : str, default=""
-        Prefix to add to all keys
+    Args:
+        nested_dict: Dictionary to flatten.
+        separator: Separator to use between nested keys.
+        prefix: Prefix to add to all keys.
 
-    Returns
-    -------
-    dict[str, Any]
-        Flattened dictionary
+    Returns:
+        Flattened dictionary.
     """
     logger.debug(
         "Flattening dictionary",
@@ -94,19 +81,13 @@ def flatten_dict(
 def save_json_file(data: Any, file_path: str | Path, indent: int | None = 2) -> None:
     """Save data to a JSON file.
 
-    Parameters
-    ----------
-    data : Any
-        Data to save (must be JSON serializable)
-    file_path : str | Path
-        Path to save the file
-    indent : int | None, default=2
-        JSON indentation level
+    Args:
+        data: Data to save (must be JSON serializable).
+        file_path: Path to save the file.
+        indent: JSON indentation level.
 
-    Raises
-    ------
-    ValueError
-        If data is not JSON serializable
+    Raises:
+        ValueError: If data is not JSON serializable.
     """
     path = Path(file_path)
     logger.debug("Saving JSON data", file_path=str(path), indent=indent)
@@ -123,22 +104,15 @@ def save_json_file(data: Any, file_path: str | Path, indent: int | None = 2) -> 
 def load_json_file(file_path: str | Path) -> Any:
     """Load data from a JSON file.
 
-    Parameters
-    ----------
-    file_path : str | Path
-        Path to the JSON file
+    Args:
+        file_path: Path to the JSON file.
 
-    Returns
-    -------
-    Any
-        Loaded data
+    Returns:
+        Loaded data.
 
-    Raises
-    ------
-    FileNotFoundError
-        If file does not exist
-    ValueError
-        If file contains invalid JSON
+    Raises:
+        FileNotFoundError: If file does not exist.
+        ValueError: If file contains invalid JSON.
     """
     path = Path(file_path)
     logger.debug("Loading JSON data", file_path=str(path))

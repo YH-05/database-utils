@@ -37,8 +37,21 @@ class TaskRepository(Protocol):
     def save(self, task: Task) -> None: ...
     def find_by_id(self, id: str) -> Task | None: ...
 
-# 型エイリアス: PascalCase
+# 型エイリアス: PascalCase（PEP 695スタイル）
 type TaskStatus = Literal["todo", "in_progress", "completed"]
+
+# ジェネリッククラス（PEP 695スタイル）
+class Repository[T]:
+    def add(self, item: T) -> None: ...
+    def get_all(self) -> list[T]: ...
+
+# ジェネリック関数（PEP 695スタイル）
+def first[T](items: list[T]) -> T | None:
+    return items[0] if items else None
+
+# ジェネリック型エイリアス（PEP 695スタイル）
+type Result[T] = T | None
+type Callback[T] = Callable[[T], None]
 ```
 
 ### コードフォーマット

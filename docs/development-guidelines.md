@@ -7,7 +7,7 @@
 #### 型ヒント（PEP 695スタイル）
 
 ```python
-# ✅ Good: Python 3.12スタイル
+# ✅ Good: Python 3.12スタイル - 型エイリアス
 type SecurityId = int
 type IdentifierType = Literal['ISIN', 'CUSIP', 'SEDOL', 'TICKER_YAHOO', 'JP_CODE']
 
@@ -17,6 +17,43 @@ def resolve(identifier: str) -> SecurityId | None:
 # ❌ Bad: 旧スタイル
 from typing import Optional, Union
 def resolve(identifier: str) -> Optional[int]:  # 使わない
+    ...
+```
+
+#### ジェネリック型パラメータ（PEP 695スタイル）
+
+```python
+# ✅ Good: Python 3.12スタイル - ジェネリッククラス
+class Repository[T]:
+    def __init__(self, model_type: type[T]) -> None:
+        self._model_type = model_type
+        self._items: list[T] = []
+
+    def add(self, item: T) -> None:
+        self._items.append(item)
+
+    def get_all(self) -> list[T]:
+        return self._items.copy()
+
+# ✅ Good: Python 3.12スタイル - ジェネリック関数
+def first[T](items: list[T]) -> T | None:
+    return items[0] if items else None
+
+def map_items[T, U](items: list[T], func: Callable[[T], U]) -> list[U]:
+    return [func(item) for item in items]
+
+# ✅ Good: Python 3.12スタイル - 型パラメータ付き型エイリアス
+type Result[T] = T | None
+type Callback[T] = Callable[[T], None]
+
+# ❌ Bad: 旧スタイル - TypeVarを明示的に定義
+from typing import TypeVar, Generic
+T = TypeVar('T')
+
+class Repository(Generic[T]):  # 使わない
+    ...
+
+def first(items: list[T]) -> T | None:  # 使わない
     ...
 ```
 

@@ -61,11 +61,28 @@ make issue TITLE="x" BODY="y"           # Issue作成
 | 項目         | 規約                            |
 | ------------ | ------------------------------- |
 | 型ヒント     | Python 3.12 スタイル（PEP 695） |
+| 型パラメータ | `class Foo[T]:`, `def bar[T]()` |
 | Docstring    | Google 形式                     |
 | クラス名     | PascalCase                      |
 | 関数/変数名  | snake_case                      |
 | 定数         | UPPER_SNAKE                     |
 | プライベート | \_prefix                        |
+
+**PEP 695 型パラメータ**: `TypeVar`/`Generic` は使わず、新構文を使用
+```python
+# ✅ Good: class Foo[T]:, def bar[T]():, type Alias[T] = ...
+class Repository[T]:
+    def add(self, item: T) -> None: ...
+
+def first[T](items: list[T]) -> T | None: ...
+
+type Result[T] = T | None
+
+# ❌ Bad: TypeVar, Generic（旧スタイル）
+from typing import TypeVar, Generic
+T = TypeVar('T')
+class Repository(Generic[T]): ...
+```
 
 ### エラーメッセージ
 
