@@ -285,33 +285,25 @@ async def fetch_multiple_users(ids: list[str]) -> list[User]:
 
 ### ドキュメントコメント
 
-**NumPy形式**:
+**Google形式**:
 ```python
 async def create_task(data: CreateTaskData) -> Task:
     """タスクを作成する。
 
-    Parameters
-    ----------
-    data : CreateTaskData
-        作成するタスクのデータ
+    Args:
+        data: 作成するタスクのデータ。
 
-    Returns
-    -------
-    Task
-        作成されたタスク
+    Returns:
+        作成されたタスク。
 
-    Raises
-    ------
-    ValidationError
-        データが不正な場合
-    DatabaseError
-        データベースエラーの場合
+    Raises:
+        ValidationError: データが不正な場合。
+        DatabaseError: データベースエラーの場合。
 
-    Examples
-    --------
-    >>> task = await create_task(CreateTaskData(title="新しいタスク", priority="high"))
-    >>> print(task.id)
-    'abc123'
+    Examples:
+        >>> task = await create_task(CreateTaskData(title="新しいタスク", priority="high"))
+        >>> print(task.id)
+        'abc123'
     """
     ...
 ```
@@ -573,7 +565,7 @@ def process_order(order: Order) -> None:
 - [ ] エッジケースがカバーされている
 
 ### ドキュメント
-- [ ] 関数・クラスにNumPy形式のdocstringがある
+- [ ] 関数・クラスにGoogle形式のdocstringがある
 - [ ] 複雑なロジックにコメントがある
 - [ ] AIDEV-TODO/FIXMEが記載されている（該当する場合）
 

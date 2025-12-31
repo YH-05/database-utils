@@ -60,7 +60,7 @@ def create_task(
 
 ### コメント規約
 
-**関数・クラスのドキュメント（NumPy形式）**:
+**関数・クラスのドキュメント（Google形式）**:
 ```python
 def count_tasks(
     tasks: list[Task],
@@ -68,22 +68,15 @@ def count_tasks(
 ) -> int:
     """タスクの合計数を計算する。
 
-    Parameters
-    ----------
-    tasks : list[Task]
-        計算対象のタスク配列
-    filter_options : TaskFilter | None, optional
-        フィルター条件
+    Args:
+        tasks: 計算対象のタスク配列。
+        filter_options: フィルター条件。
 
-    Returns
-    -------
-    int
-        タスクの合計数
+    Returns:
+        タスクの合計数。
 
-    Raises
-    ------
-    ValidationError
-        タスク配列が不正な場合
+    Raises:
+        ValidationError: タスク配列が不正な場合。
     """
     ...
 ```

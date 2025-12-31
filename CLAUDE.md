@@ -5,7 +5,17 @@ updated_at: 2025-12-31
 # このプロパティは、Claude Codeが関連するドキュメントの更新を検知するために必要です。消去しないでください。
 ---
 
-# Python 開発テンプレート for Claude Code
+# database-utils
+
+SQLite を中心としたデータベース接続ユーティリティ。金融データの管理（CRUD操作）とバックアップ/同期機能を提供する。
+
+## プロジェクト概要
+
+| 項目 | 内容 |
+| --- | --- |
+| 目的 | 金融データのデータベース管理を簡素化 |
+| 主要DB | SQLite（将来的に他DBへの拡張を考慮） |
+| 主な機能 | データの読み書き（CRUD）、バックアップ/同期 |
 
 **Python 3.12** | uv | Ruff | pyright | pytest + Hypothesis | pre-commit | GitHub Actions
 
@@ -51,7 +61,7 @@ make issue TITLE="x" BODY="y"           # Issue作成
 | 項目         | 規約                            |
 | ------------ | ------------------------------- |
 | 型ヒント     | Python 3.12 スタイル（PEP 695） |
-| Docstring    | NumPy 形式                      |
+| Docstring    | Google 形式                     |
 | クラス名     | PascalCase                      |
 | 関数/変数名  | snake_case                      |
 | 定数         | UPPER_SNAKE                     |
@@ -72,7 +82,7 @@ raise FileNotFoundError(f"Config not found. Create by: python -m {__package__}.i
 ### ロギング（必須）
 
 ```python
-from project_name.utils.logging_config import get_logger
+from database_utils.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
@@ -103,26 +113,23 @@ def process_data(data: list) -> list:
 # AIDEV-QUESTION: 確認が必要な疑問点
 ```
 
-## template/ 参照パターン
+## コード参照パターン
 
-実装前に必ず参照すること。template/ は変更・削除禁止。
-
-| 実装対象         | 参照先                                                   |
-| ---------------- | -------------------------------------------------------- |
-| クラス/関数      | `@template/src/template_package/core/example.py`         |
-| 型定義           | `@template/src/template_package/types.py`                |
-| ユーティリティ   | `@template/src/template_package/utils/helpers.py`        |
-| ロギング設定     | `@template/src/template_package/utils/logging_config.py` |
-| プロファイリング | `@template/src/template_package/utils/profiling.py`      |
-| 単体テスト       | `@template/tests/unit/`                                  |
-| プロパティテスト | `@template/tests/property/`                              |
-| 統合テスト       | `@template/tests/integration/`                           |
-| フィクスチャ     | `@template/tests/conftest.py`                            |
+| 実装対象         | 参照先                                              |
+| ---------------- | --------------------------------------------------- |
+| DB接続           | `@src/database_utils/core/connection.py`            |
+| CRUD操作         | `@src/database_utils/core/repository.py`            |
+| バックアップ     | `@src/database_utils/core/backup.py`                |
+| 型定義           | `@src/database_utils/types.py`                      |
+| ユーティリティ   | `@src/database_utils/utils/helpers.py`              |
+| ロギング設定     | `@src/database_utils/utils/logging_config.py`       |
+| 単体テスト       | `@tests/unit/`                                      |
+| 統合テスト       | `@tests/integration/`                               |
 
 ### プロファイリング使用例
 
 ```python
-from project_name.utils.profiling import profile, timeit, profile_context
+from database_utils.utils.profiling import profile, timeit, profile_context
 
 @profile  # 詳細プロファイリング
 def heavy_function():
@@ -201,8 +208,8 @@ with profile_context("処理名"):  # コンテキスト計測
 ## ディレクトリ構成
 
 ```
-src/project_name/       # メインパッケージ
-├── core/               # コアロジック
+src/database_utils/     # メインパッケージ
+├── core/               # コアロジック（DB接続、CRUD操作）
 ├── utils/              # ユーティリティ
 ├── types.py            # 型定義
 └── py.typed            # PEP 561マーカー

@@ -397,7 +397,7 @@ scripts/
 - `glossary.md`: 用語集
 
 **ソースコード内**:
-- NumPy形式docstring: 関数・クラスの説明
+- Google形式docstring: 関数・クラスの説明
 
 ## チェックリスト
 

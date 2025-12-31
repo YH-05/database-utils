@@ -1,7 +1,7 @@
 [project]
-name = "project-name"
+name = "database-utils"
 version = "0.1.0"
-description = "A modern Python project template optimized for Claude Code with strict guardrails"
+description = "SQLite database utilities for financial data management with CRUD operations and backup/sync features"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -36,7 +36,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/project_name"]
+packages = ["src/database_utils"]
 
 [tool.ruff]
 line-length = 88

@@ -137,8 +137,8 @@ def setup_logging(
 
     # 環境変数からフォーマットを取得
     env_format = os.environ.get("LOG_FORMAT", "").lower()
-    if env_format in ["json", "console", "plain"]:
-        format = env_format  # type: ignore
+    if env_format in ("json", "console", "plain"):
+        format = env_format  # type: ignore[assignment]
 
     # プロセッサの設定
     processors: list[Any] = [

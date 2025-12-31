@@ -62,29 +62,23 @@ class ExampleClass:
     - Comprehensive docstrings
     - Proper error handling
 
-    Attributes
-    ----------
-    config : ExampleConfig
-        Configuration for this instance
-    data : list[dict[str, Any]]
-        Internal data storage
+    Attributes:
+        config: Configuration for this instance.
+        data: Internal data storage.
 
-    Examples
-    --------
-    >>> config = ExampleConfig(name="test", max_items=50)
-    >>> example = ExampleClass(config)
-    >>> example.add_item({"id": 1, "value": "test"})
-    >>> len(example)
-    1
+    Examples:
+        >>> config = ExampleConfig(name="test", max_items=50)
+        >>> example = ExampleClass(config)
+        >>> example.add_item({"id": 1, "value": "test"})
+        >>> len(example)
+        1
     """
 
     def __init__(self, config: ExampleConfig) -> None:
         """Initialize ExampleClass with configuration.
 
-        Parameters
-        ----------
-        config : ExampleConfig
-            Configuration object
+        Args:
+            config: Configuration object.
         """
         logger.debug(
             "Creating ExampleClass instance",
@@ -104,15 +98,11 @@ class ExampleClass:
     def add_item(self, item: ItemDict) -> None:
         """Add an item to the internal storage.
 
-        Parameters
-        ----------
-        item : dict[str, Any]
-            Item to add
+        Args:
+            item: Item to add.
 
-        Raises
-        ------
-        ValueError
-            If max_items limit is reached or validation fails
+        Raises:
+            ValueError: If max_items limit is reached or validation fails.
         """
         logger.debug(
             "Adding item",
@@ -149,15 +139,11 @@ class ExampleClass:
     def _validate_item(self, item: ItemDict) -> None:
         """Validate an item before adding.
 
-        Parameters
-        ----------
-        item : dict[str, Any]
-            Item to validate
+        Args:
+            item: Item to validate.
 
-        Raises
-        ------
-        ValueError
-            If item is invalid
+        Raises:
+            ValueError: If item is invalid.
         """
         logger.debug(
             "Validating item",
@@ -202,17 +188,12 @@ class ExampleClass:
     ) -> list[ItemDict]:
         """Get items with optional filtering.
 
-        Parameters
-        ----------
-        filter_key : str | None
-            Key to filter by
-        filter_value : Any | None
-            Value to filter by
+        Args:
+            filter_key: Key to filter by.
+            filter_value: Value to filter by.
 
-        Returns
-        -------
-        list[dict[str, Any]]
-            Filtered items
+        Returns:
+            Filtered items.
         """
         logger.debug(
             "Getting items",
@@ -262,24 +243,16 @@ def process_data(
 ) -> list[ItemDict]:
     """Process data using a processor.
 
-    Parameters
-    ----------
-    data : list[dict[str, Any]]
-        Data to process
-    processor : DataProcessor
-        Processor to use
-    validate : bool
-        Whether to validate data before processing
+    Args:
+        data: Data to process.
+        processor: Processor to use.
+        validate: Whether to validate data before processing.
 
-    Returns
-    -------
-    list[dict[str, Any]]
-        Processed data
+    Returns:
+        Processed data.
 
-    Raises
-    ------
-    ValueError
-        If validation fails
+    Raises:
+        ValueError: If validation fails.
     """
     logger.debug(
         "Processing data",

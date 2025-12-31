@@ -56,7 +56,7 @@ docs/development-guidelines.md
 - Python規約（PEP 695準拠）
 - 型定義・命名規則
 - 関数設計とエラーハンドリング
-- コメント規約（NumPy形式）
+- コメント規約（Google形式）
 - セキュリティとパフォーマンス
 - テストコード実装（pytest）
 - リファクタリング手法
